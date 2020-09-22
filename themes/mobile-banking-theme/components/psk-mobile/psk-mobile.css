@@ -31,6 +31,10 @@
     background-color: #FAFAFA;
 }
 
+.mobile > main * {
+    color: #212121;
+}
+
 .mobile > main .main-cover {
     background-color: rgba(0, 0, 0, 0.75);
 }

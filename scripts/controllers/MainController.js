@@ -17,7 +17,7 @@ class MainController extends ContainerController {
                 {
                     name: 'Services',
                     icon: 'briefcase',
-                    page: 'payments'
+                    page: 'services'
                 },
                 {
                     name: 'Account',
