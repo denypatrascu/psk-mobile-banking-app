@@ -12,6 +12,12 @@
     },
     {
       "name": "Payments"
+    },
+    {
+      "name": "Services"
+    },
+    {
+      "name": "Account"
     }
   ]
 }

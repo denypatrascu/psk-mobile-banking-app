@@ -16,11 +16,13 @@ class MainController extends ContainerController {
                 },
                 {
                     name: 'Services',
-                    icon: 'briefcase'
+                    icon: 'briefcase',
+                    page: 'payments'
                 },
                 {
                     name: 'Account',
-                    icon: 'user'
+                    icon: 'user',
+                    page: 'account'
                 }
             ],
             fullscreen: {
