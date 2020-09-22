@@ -1,0 +1,18 @@
+
+{
+  "defaultMenuConfig": {
+    "icon": "fa-bars",
+    "type": "route",
+    "component": "psk-page-loader",
+    "exact": true,
+    "404": "/pages/404.html"
+  },
+  "pages": [
+    {
+      "name": "Balance"
+    },
+    {
+      "name": "Payments"
+    }
+  ]
+}

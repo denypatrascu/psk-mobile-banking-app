@@ -1,0 +1,20 @@
+<psk-example id="mobile-demo-container">
+    <psk-mobile controller-name="MainController">
+        <img slot="title" src="/assets/images/logo.svg" alt="Mobile Banking Logo">
+
+        <div slot="options">
+            <psk-button event-name="toggle-fullscreen">
+                <psk-icon icon="@fullscreen.option.icon"></psk-icon>
+                <psk-text-input value="@fullscreen.option.text" read-only></psk-text-input>
+            </psk-button>
+        </div>
+
+        <section slot="content">
+
+        </section>
+
+        <psk-for-each slot="footer" data-view-model="footer">
+            <psk-button-link name="@name" icon="@icon" page="@page"></psk-button-link>
+        </psk-for-each>
+    </psk-mobile>
+</psk-example>

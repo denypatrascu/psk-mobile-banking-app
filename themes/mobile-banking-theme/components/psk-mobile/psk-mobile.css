@@ -1,0 +1,41 @@
+.mobile {
+    background-color: #EEEEEE;
+}
+
+.mobile > header {
+    background-color: #4461B5 !important;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.65);
+}
+
+::slotted([slot='title']) {
+    display: grid;
+    height: 40px;
+}
+
+.mobile > header > .title {
+    font-size: 1.6rem;
+}
+
+.mobile > header .btn:hover,
+.mobile > header .btn:focus,
+.mobile > header .btn:active {
+    border-style: solid;
+    border-color: #5E7FE1;
+}
+
+.mobile > header .aside-menu {
+    background-color: #2C3E74 !important;
+}
+
+.mobile > main {
+    background-color: #FAFAFA;
+}
+
+.mobile > main .main-cover {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.mobile > footer {
+    background-color: #FFFFFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}

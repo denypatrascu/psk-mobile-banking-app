@@ -1,0 +1,55 @@
+<psk-example id="mobile-demo-container">
+    <psk-mobile controller-name="MainController">
+        <img slot="title" src="/assets/images/logo.svg" alt="Mobile Banking Logo">
+
+        <div slot="options">
+            <psk-button event-name="toggle-fullscreen">
+                <psk-icon icon="@fullscreen.option.icon"></psk-icon>
+                <psk-text-input value="@fullscreen.option.text" read-only></psk-text-input>
+            </psk-button>
+        </div>
+
+        <section slot="content">
+            <psk-card title="Your accounts" class="section">
+                <psk-card title="Cash account" class="bank-account">
+                    <span class="money">$ 425.74</span>
+                    <psk-button class="history">
+                        <span>History</span>
+                        <psk-icon icon="history"></psk-icon>
+                    </psk-button>
+                    <psk-button class="payment">
+                        <span>New payment</span>
+                        <psk-icon icon="chevron-right"></psk-icon>
+                    </psk-button>
+                </psk-card>
+                <psk-card title="Savings" class="bank-account">
+                    <span class="money">$ 2,000.00</span>
+                    <psk-button class="history">
+                        <span>History</span>
+                        <psk-icon icon="history"></psk-icon>
+                    </psk-button>
+                    <psk-button class="payment">
+                        <span>Deposit</span>
+                        <psk-icon icon="chevron-right"></psk-icon>
+                    </psk-button>
+                </psk-card>
+            </psk-card>
+            <psk-card title="Your cards" class="section">
+                <psk-link class="button-link">
+                    <psk-card class="bank-cards">
+                    <span>
+                        <img src="/assets/images/card-1.png" alt="Card 1">
+                        <img src="/assets/images/card-2.png" alt="Card 2">
+                    </span>
+                        <span>More details</span>
+                        <psk-icon icon="credit-card"></psk-icon>
+                    </psk-card>
+                </psk-link>
+            </psk-card>
+        </section>
+
+        <psk-for-each slot="footer" data-view-model="footer">
+            <psk-button-link name="@name" icon="@icon" page="@page"></psk-button-link>
+        </psk-for-each>
+    </psk-mobile>
+</psk-example>

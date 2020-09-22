@@ -1,0 +1,9 @@
+{
+    "basePagesUrl": "/pages/",
+    "profile": {
+        "username": "John Doe",
+        "email": "john.doe@axiologic.net",
+        "avatar": "/assets/images/user.png"
+    },
+    "theme": "mobile-banking-theme"
+}

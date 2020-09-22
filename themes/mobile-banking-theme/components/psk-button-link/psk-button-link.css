@@ -1,0 +1,15 @@
+[slot='options'] psk-link,
+[slot='options'] psk-link *,
+[slot='options'] psk-link .icon {
+    color: #4461B5;
+    font-weight: bold;
+}
+
+[slot='footer'] psk-link > *,
+[slot='footer'] psk-link .icon {
+    color: #4461B5;
+}
+
+[slot='footer'] psk-link .icon {
+    font-size: 130%;
+}

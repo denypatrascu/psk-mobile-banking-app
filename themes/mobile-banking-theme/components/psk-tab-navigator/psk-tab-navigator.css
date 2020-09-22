@@ -1,0 +1,24 @@
+.tab-navigator {
+    overflow-x: auto;
+    margin-bottom: 0.5rem;
+}
+
+.tab-navigator button.btn {
+    margin: 0;
+    border-radius: 0;
+}
+
+.tab-navigator psk-button.active button.btn {
+    background-color: #354F9B;
+    border-style: none;
+}
+
+.tab-navigator psk-button:first-of-type button.btn {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.tab-navigator psk-button:last-of-type button.btn {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

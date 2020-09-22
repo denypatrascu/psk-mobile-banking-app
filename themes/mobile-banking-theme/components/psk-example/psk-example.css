@@ -1,0 +1,7 @@
+:host .card.psk-card,
+:host .card.psk-card .card-body,
+:host .card.psk-card .card-body .example-content {
+    margin: 0; padding: 0;
+    border: none;
+    height: 100%;
+}

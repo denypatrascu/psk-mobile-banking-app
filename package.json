@@ -1,0 +1,28 @@
+{
+  "name": "mobile-banking-app",
+  "version": "1.0.0",
+  "description": "Application made with CardinalJS",
+  "main": "index.html",
+  "scripts": {
+    "postinstall": "node ./node_modules/octopus/scripts/run && npm run build",
+    "build-cardinal": "node ./node_modules/octopus/scripts/run build-cardinal",
+    "build": "npm run build-cardinal",
+    "web": "ws --spa ./index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denypatrascu/psk-mobile-demo.git"
+  },
+  "dependencies": {
+    "octopus": "git+https://github.com/PrivateSky/octopus.git#1.0.4",
+    "local-web-server": "^3.0.7"
+  },
+  "keywords": [
+    "cardinal"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/denypatrascu/psk-mobile-demo/issues"
+  },
+  "homepage": "https://github.com/denypatrascu/psk-mobile-demo/#readme"
+}
