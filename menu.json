@@ -4,9 +4,7 @@
     "type": "route",
     "component": "psk-page-loader",
     "exact": true,
-    "indexed": true,
-    "pagePrefix": "?",
-    "historyType": "query"
+    "indexed": true
   },
   "pages": [
     {
