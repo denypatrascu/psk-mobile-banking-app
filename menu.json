@@ -8,6 +8,11 @@
   },
   "pages": [
     {
+      "name": "Home",
+      "path": "/home",
+      "pageSrc": "index.html"
+    },
+    {
       "name": "Balance"
     },
     {
