@@ -406,13 +406,16 @@ const PskBarcodeScanner = class {
                 constraints['video'] = true;
             }
             let gotStream = (stream) => {
+                alert('Am primit stream-ul video!');
                 window['stream'] = stream; // make stream available to console
                 this.cameraIsOn = true;
                 this.videoElement.srcObject = stream;
                 this.scanBarcodeFromCamera();
             };
             let startVideo = (constraints) => {
-                navigator.mediaDevices.getUserMedia(constraints).then(gotStream.bind(this)).catch(err => {
+                navigator.mediaDevices.getUserMedia(constraints)
+                    .then(gotStream.bind(this))
+                    .catch(err => {
                     if (err.message === "Could not start video source") {
                         if (alternativeCameras.length) {
                             this.removeDeviceIdFromList(constraints['video'].deviceId.exact);
@@ -511,6 +514,7 @@ const PskBarcodeScanner = class {
         let scannerContainer = this.element.querySelector('#scanner_container');
         let gotDevices = (deviceInfos) => {
             if (deviceInfos.length) {
+                alert(JSON.stringify(deviceInfos, null, 4));
                 for (let i = deviceInfos.length - 1; i >= 0; --i) {
                     let deviceInfo = deviceInfos[i];
                     let option = document.createElement('option');
