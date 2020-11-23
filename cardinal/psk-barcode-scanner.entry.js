@@ -380,7 +380,7 @@ const PskBarcodeScanner = class {
          */
         this.getStream = () => {
             let camerasSelectList = this.element.querySelector('select#videoSource');
-            // let scannerContainer = this.element.querySelector('#scanner_container');
+            let scannerContainer = this.element.querySelector('#scanner_container');
             let alternativeCameras = Array.from(camerasSelectList.querySelectorAll('option')).map((option) => {
                 return option.value;
             }).filter((cameraId) => {
@@ -391,8 +391,8 @@ const PskBarcodeScanner = class {
             };
             if (camerasSelectList.value) {
                 constraints['video'] = {
-                    // width: { ideal: scannerContainer.offsetWidth },
-                    // height: { ideal: scannerContainer.offsetHeight },
+                    width: { ideal: scannerContainer.offsetWidth },
+                    height: { ideal: scannerContainer.offsetHeight },
                     facingMode: {
                         // this is the back camera
                         ideal: 'environment'
@@ -660,6 +660,16 @@ const PskBarcodeScanner = class {
         barcodeCanvas.height = dimensions.image.height;
         barcodeContext.drawImage(this.videoElement, (dimensions.original.width - dimensions.image.width) / 2, (dimensions.original.height - dimensions.image.height) / 2, dimensions.image.width, dimensions.image.height, 0, 0, dimensions.image.width, dimensions.image.height);
         const { data } = barcodeContext.getImageData(0, 0, dimensions.image.width, dimensions.image.height);
+        const scale = 0.35;
+        const url = barcodeCanvas.toDataURL('image/png');
+        const output = [
+            'padding: ' + barcodeCanvas.height * scale + 'px ' + barcodeCanvas.width * scale + 'px;',
+            'background: url(' + url + ') no-repeat;',
+            'background-size: contain;'
+        ].join(' ');
+        console.log('dimensions', dimensions);
+        console.log('ratio', ratio);
+        console.log('%c ', output);
         const image = this.ZXing._resize(dimensions.image.width, dimensions.image.height);
         this.decodeImage(image, data, () => {
             if (!this.componentIsDisconnected) {
