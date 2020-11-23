@@ -25,6 +25,7 @@
 
 .mobile > header .aside-menu {
     background-color: #2C3E74 !important;
+    padding-right: 1em;
 }
 
 .mobile > main {
@@ -42,4 +43,8 @@
 .mobile > footer {
     background-color: #FFFFFF;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+:host(.noPadding) .mobile > main {
+    padding: 0;
 }

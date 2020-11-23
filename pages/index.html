@@ -1,19 +1,17 @@
-<!--<psk-example class="mobile-showcase">-->
+<psk-mobile class="noPadding" controller-name="TestMobileController">
+    <img slot="title" src="assets/images/logo.svg" alt="Mobile Banking Logo">
 
-    <psk-mobile title="Demo" mode="demo" class="noPadding" controller-name="TestMobileController">
-        <psk-container controller-name="TestBarcodeController">
-            <psk-condition condition="@scanner.isActive">
-                <psk-button slot="condition-false" event-name="toggle-scanner">Start scanning!</psk-button>
-                <psk-barcode-scanner slot="condition-true" data="@scanner.data" disable-frame></psk-barcode-scanner>
-            </psk-condition>
-        </psk-container>
+    <psk-container controller-name="TestBarcodeController">
+        <psk-condition condition="@scanner.isActive">
+            <psk-button slot="condition-false" event-name="toggle-scanner">Start scanning!</psk-button>
+            <psk-barcode-scanner slot="condition-true" data="@scanner.data" disable-frame></psk-barcode-scanner>
+        </psk-condition>
+    </psk-container>
 
-        <psk-for-each slot="options" data-view-model="options">
-            <psk-button-link name="@name" page="@page"></psk-button-link>
-        </psk-for-each>
-        <psk-for-each slot="footer" data-view-model="footer">
-            <psk-button-link name="@name" icon="@icon" page="@page"></psk-button-link>
-        </psk-for-each>
-    </psk-mobile>
-
-<!--</psk-example>-->
+    <psk-for-each slot="options" data-view-model="options">
+        <psk-button-link name="@name" page="@page"></psk-button-link>
+    </psk-for-each>
+    <psk-for-each slot="footer" data-view-model="footer">
+        <psk-button-link name="@name" icon="@icon" page="@page"></psk-button-link>
+    </psk-for-each>
+</psk-mobile>

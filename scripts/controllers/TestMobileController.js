@@ -1,14 +1,10 @@
 import ContainerController from '../../cardinal/controllers/base-controllers/ContainerController.js';
+import { GLOBAL } from './MainController.js';
 
 class TestMobileController extends ContainerController {
     getModel() {
         return {
-            footer: [
-                { name: 'Home', icon: 'home', page: 'pages/home' },
-                { name: 'Tasks', icon: 'tasks', page: 'pages/tasks' },
-                { name: 'History', icon: 'history', page: 'pages/history' },
-                { name: 'Settings', icon: 'cog', page: 'pages/settings' }
-            ],
+            footer: [...GLOBAL.footer],
             options: [
                 { name: 'About', page: 'about' },
                 { name: 'Glossary', page: 'glossary' }

@@ -8,7 +8,7 @@
   },
   "pages": [
     {
-      "name": "Home",
+      "name": "Barcode",
       "path": "/home",
       "pageSrc": "index.html"
     },
@@ -20,9 +20,6 @@
     },
     {
       "name": "Services"
-    },
-    {
-      "name": "Account"
     }
   ]
 }

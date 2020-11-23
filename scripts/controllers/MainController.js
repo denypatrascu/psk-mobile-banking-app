@@ -1,30 +1,34 @@
 import ContainerController from '../../cardinal/controllers/base-controllers/ContainerController.js';
 
+const GLOBAL = {
+    footer: [
+        {
+            name: 'Barcode',
+            icon: 'camera',
+            page: 'home'
+        },
+        {
+            name: 'Balance',
+            icon: 'balance-scale',
+            page: 'balance'
+        },
+        {
+            name: 'Payments',
+            icon: 'money',
+            page: 'payments'
+        },
+        {
+            name: 'Services',
+            icon: 'briefcase',
+            page: 'services'
+        }
+    ],
+}
+
 class MainController extends ContainerController {
     getModel() {
         const model = {
-            footer: [
-                {
-                    name: 'Balance',
-                    icon: 'balance-scale',
-                    page: 'balance'
-                },
-                {
-                    name: 'Payments',
-                    icon: 'money',
-                    page: 'payments'
-                },
-                {
-                    name: 'Services',
-                    icon: 'briefcase',
-                    page: 'services'
-                },
-                {
-                    name: 'Account',
-                    icon: 'user',
-                    page: 'account'
-                }
-            ],
+            footer: [...GLOBAL.footer],
             fullscreen: {
                 event: 'toggle-fullscreen',
                 in: {
@@ -63,8 +67,6 @@ class MainController extends ContainerController {
         });
     }
 
-
-
     async toggleFullScreen() {
         if (!document.fullscreenElement) {
             try {
@@ -99,3 +101,4 @@ class MainController extends ContainerController {
 }
 
 export default MainController;
+export { GLOBAL };
