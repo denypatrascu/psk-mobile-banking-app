@@ -4,7 +4,7 @@
     <psk-container controller-name="TestBarcodeController">
         <psk-condition condition="@scanner.isActive">
             <psk-button slot="condition-false" event-name="toggle-scanner">Start scanning!</psk-button>
-            <psk-barcode-scanner slot="condition-true" data="@scanner.data" disable-frame></psk-barcode-scanner>
+            <psk-barcode-scanner slot="condition-true" data="@scanner.data"></psk-barcode-scanner>
         </psk-condition>
     </psk-container>
 
