@@ -5,7 +5,7 @@ class TestBarcodeController extends ContainerController {
         return ({
             scanner: {
                 isActive: true,
-                data: '<test>'
+                data: ''
             }
         });
     }
@@ -23,6 +23,7 @@ class TestBarcodeController extends ContainerController {
 
         this.model.onChange('scanner.data', () => {
             console.log('barcode scanned:', this.model.scanner.data);
+            alert(this.model.scanner.data);
         });
     }
 }
