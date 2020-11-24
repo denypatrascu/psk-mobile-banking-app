@@ -738,24 +738,45 @@ const PskBarcodeScanner = class {
     cameraChanged(deviceId) {
         this.activeDeviceId = deviceId;
         const videoElement = this.element.querySelector('#video');
-        this.codeReader.reset();
+        let scannerContainer = this.element.querySelector('#scanner_container');
         let log = console.log;
         console.log = (...args) => {
             if (args.length != 0 && args[0] instanceof this.ZXing.NotFoundException)
                 return;
             log(...args);
         };
-        this.codeReader.decodeFromVideoDevice(this.activeDeviceId, videoElement, (result, err) => {
+        // this.codeReader.decodeFromVideoDevice(this.activeDeviceId, videoElement, (result, err) => {
+        //   if (result) {
+        //     console.log(result)
+        //     // document.getElementById('result').textContent = result.text
+        //   }
+        //   if (err && !(err instanceof this.ZXing.NotFoundException)) {
+        //     // console.error(err)
+        //     // document.getElementById('result').textContent = err
+        //   }
+        // })
+        // console.log(`Started continous decode from camera with id ${this.activeDeviceId}`)
+        const constraints = {
+            video: {
+                facingMode: 'environment',
+                width: { ideal: scannerContainer.offsetWidth },
+                height: { ideal: scannerContainer.offsetHeight },
+            }
+        };
+        videoElement.width = constraints.video.width.ideal;
+        videoElement.height = constraints.video.height.ideal;
+        this.codeReader.reset();
+        this.codeReader.decodeFromConstraints(constraints, videoElement, (result, err) => {
             if (result) {
                 console.log(result);
                 // document.getElementById('result').textContent = result.text
             }
             if (err && !(err instanceof this.ZXing.NotFoundException)) {
-                // console.error(err)
+                console.error(err);
                 // document.getElementById('result').textContent = err
             }
         });
-        console.log(`Started continous decode from camera with id ${this.activeDeviceId}`);
+        // setInterval(decode, 1000);
     }
     async componentWillLoad() {
         let tick = () => {
@@ -849,7 +870,7 @@ const PskBarcodeScanner = class {
                 ? (h("psk-highlight", { title: "No camera detected", "type-of-highlight": "warning" }, h("p", null, "You can still use your device files to check for barcodes!")))
                 : [
                     h("div", { id: "scanner_container", style: style.videoWrapper }, h("input", { type: "file", accept: "video/*", capture: "camera", style: { display: 'none' } }), h("video", { id: "video", muted: true, autoplay: true, playsinline: true, style: style.video })),
-                    h("div", { style: style.controls }, h("label", { htmlFor: "video-source", style: { margin: '0' } }, "Video source: "), h("div", { class: "select", id: "camera-source" }, h("span", null, this.activeDeviceId), selectCamera))
+                    h("div", { style: style.controls }, h("label", { htmlFor: "video-source", style: { margin: '0' } }, "Video source: "), h("div", { class: "select", id: "camera-source" }, selectCamera))
                 ], this.cameraIsAvailable === false
                 ? [
                     h("psk-files-chooser", { accept: "image/*", label: "Load a file from device", "event-name": "loaded-local-file" }),
