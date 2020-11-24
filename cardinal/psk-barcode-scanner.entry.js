@@ -535,7 +535,7 @@ const PskBarcodeScanner = class {
         //   }
         // }
         // @ts-ignore
-        const codeReader = new ZXing.BrowserMultiFormatReader();
+        const codeReader = new ZXing.BrowserMultiFormatReader(null, 1500);
         codeReader.listVideoInputDevices()
             // .then(gotDevices)
             .then((deviceInfos) => {
@@ -739,13 +739,19 @@ const PskBarcodeScanner = class {
         this.activeDeviceId = deviceId;
         const videoElement = this.element.querySelector('#video');
         this.codeReader.reset();
+        let log = console.log;
+        console.log = (...args) => {
+            if (args.length != 0 && args[0] instanceof this.ZXing.NotFoundException)
+                return;
+            log(...args);
+        };
         this.codeReader.decodeFromVideoDevice(this.activeDeviceId, videoElement, (result, err) => {
             if (result) {
                 console.log(result);
                 // document.getElementById('result').textContent = result.text
             }
             if (err && !(err instanceof this.ZXing.NotFoundException)) {
-                console.error(err);
+                // console.error(err)
                 // document.getElementById('result').textContent = err
             }
         });
@@ -755,7 +761,7 @@ const PskBarcodeScanner = class {
         let tick = () => {
             if (window['ZXing']) {
                 this.ZXing = window['ZXing'];
-                this.codeReader = new this.ZXing.BrowserMultiFormatReader();
+                this.codeReader = new this.ZXing.BrowserMultiFormatReader(null, 15000);
             }
             else {
                 setTimeout(tick, SCAN_TIMEOUT);
