@@ -7,66 +7,6 @@ import { C as CustomTheme } from './CustomTheme-f57ed858.js';
 import './TableOfContentEvent-f33bf2c4.js';
 import { T as TableOfContentProperty } from './TableOfContentProperty-de8188be.js';
 
-function isMobile(restrict) {
-  if (restrict) return false;
-  let userAgentKey ='userAgent';
-  let sUserAgent = navigator[userAgentKey].toLowerCase();
-  let bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
-  let bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
-  let bIsMidp = sUserAgent.match(/midp/i) == "midp";
-  let bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
-  let bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
-  let bIsAndroid = sUserAgent.match(/android/i) == "android";
-  let bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
-  let bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
-  return bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM;
-}
-
-function getScaledDim(img, maxWidth, maxHeight) {
-  let scaled = {
-    ratio: img.width / img.height,
-    width: img.width,
-    height: img.height
-  };
-  if (scaled.width > maxWidth) {
-    scaled.width = maxWidth;
-    scaled.height = scaled.width / scaled.ratio;
-  }
-  if (scaled.height > maxHeight) {
-    scaled.height = maxHeight;
-    scaled.width = scaled.height / scaled.ratio;
-  }
-
-  return scaled;
-
-}
-
-/* https://stackoverflow.com/questions/59287928/algorithm-to-create-a-polygon-from-points */
-function polySort(points) {
-  function squaredPolar(point, centre) {
-    return [
-      Math.atan2(point[1] - centre[1], point[0] - centre[0]),
-      (point[0] - centre[0]) ** 2 + (point[1] - centre[1]) ** 2 // Square of distance
-    ];
-  }
-
-  // Get "centre of mass"
-  let centre = [points.reduce((sum, p) => sum + p[0], 0) / points.length,
-    points.reduce((sum, p) => sum + p[1], 0) / points.length];
-
-  // Sort by polar angle and distance, centered at this centre of mass.
-  for (let point of points) point.push(...squaredPolar(point, centre));
-  points.sort((a, b) => a[2] - b[2] || a[3] - b[3]);
-  // Throw away the temporary polar coordinates
-  for (let point of points) point.length -= 2;
-}
-
-
-
-const BarcodeUtilFunctions = {
-  isMobile, polySort, getScaledDim
-};
-
 class CanvasOverlay {
 
   constructor(scannerContainer) {
@@ -144,21 +84,14 @@ class VideoOverlay extends CanvasOverlay {
     let x4 = points[3].x;
     let y4 = points[3].y;
 
-    let paddings = [this.cropOptions[0], this.cropOptions[1]];
     let isLine = x3 + y3 + x4 + y4 === 0;
-
-    x1 += paddings[0];
-    x2 += paddings[0];
-    x3 += paddings[0];
-    x4 += paddings[0];
-
-    y1 += paddings[1];
-    y2 += paddings[1];
-    y3 += paddings[1];
-    y4 += paddings[1];
 
     this.overlayCanvas.width = this.dimensions.width;
     this.overlayCanvas.height = this.dimensions.height;
+
+    let xPadding = this.cropOptions[0];
+    let yPadding = this.cropOptions[1];
+    let frameWidth = this.cropOptions[2];
 
     if (this.overlayCanvas.getContext) {
       let ctx = this.overlayCanvas.getContext('2d');
@@ -173,22 +106,15 @@ class VideoOverlay extends CanvasOverlay {
         ctx.lineTo(x1, y1);
         ctx.lineTo(x2, y2);
       } else {
-        let points = [[x1, y1], [x2, y2], [x3, y3], [x4, y4]];
-        BarcodeUtilFunctions.polySort(points);
-        ctx.moveTo(points[0][0], points[0][1]);
-        ctx.lineTo(points[1][0], points[1][1]);
-        ctx.lineTo(points[2][0], points[2][1]);
-        ctx.lineTo(points[3][0], points[3][1]);
+        const gap = 60;
+        const size = frameWidth - 2 * gap;
+        ctx.rect(xPadding + gap, yPadding + gap, size, size);
       }
 
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
       ctx.strokeStyle = '#48d960FF';
-
-      let xPadding = this.cropOptions[0];
-      let yPadding = this.cropOptions[1];
-      let frameWidth = this.cropOptions[2];
 
       this.addLensCorners(ctx, xPadding, yPadding, frameWidth, ANGLE_WIDTH);
 
@@ -338,8 +264,6 @@ const PskBarcodeScanner = class {
         }
         this.cleanupOverlays();
         this.drawOverlays();
-        // videoElement.width = constraints.video.width.ideal;
-        // videoElement.height = constraints.video.height.ideal;
         this.codeReader.reset();
         this.codeReader.decodeFromConstraints(constraints, videoElement, (result, err) => {
             if (result) {
