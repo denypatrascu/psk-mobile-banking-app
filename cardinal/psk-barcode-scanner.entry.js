@@ -735,27 +735,16 @@ const PskBarcodeScanner = class {
     //     }
     //   })
     // }
-    cameraChanged(deviceId) {
-        this.activeDeviceId = deviceId;
+    startCamera(deviceId) {
         const videoElement = this.element.querySelector('#video');
         let scannerContainer = this.element.querySelector('#scanner_container');
         let log = console.log;
         console.log = (...args) => {
-            if (args.length != 0 && args[0] instanceof this.ZXing.NotFoundException)
+            if (args.length != 0 && args[0] instanceof this.ZXing.NotFoundException) {
                 return;
+            }
             log(...args);
         };
-        // this.codeReader.decodeFromVideoDevice(this.activeDeviceId, videoElement, (result, err) => {
-        //   if (result) {
-        //     console.log(result)
-        //     // document.getElementById('result').textContent = result.text
-        //   }
-        //   if (err && !(err instanceof this.ZXing.NotFoundException)) {
-        //     // console.error(err)
-        //     // document.getElementById('result').textContent = err
-        //   }
-        // })
-        // console.log(`Started continous decode from camera with id ${this.activeDeviceId}`)
         const constraints = {
             video: {
                 facingMode: 'environment',
@@ -763,6 +752,10 @@ const PskBarcodeScanner = class {
                 height: { ideal: scannerContainer.offsetHeight },
             }
         };
+        if (deviceId && deviceId !== 'no-camera') {
+            delete constraints.video.facingMode;
+            constraints.video['deviceId'] = { exact: deviceId };
+        }
         videoElement.width = constraints.video.width.ideal;
         videoElement.height = constraints.video.height.ideal;
         this.codeReader.reset();
@@ -776,7 +769,21 @@ const PskBarcodeScanner = class {
                 // document.getElementById('result').textContent = err
             }
         });
-        // setInterval(decode, 1000);
+    }
+    // this.codeReader.decodeFromVideoDevice(this.activeDeviceId, videoElement, (result, err) => {
+    //   if (result) {
+    //     console.log(result)
+    //     // document.getElementById('result').textContent = result.text
+    //   }
+    //   if (err && !(err instanceof this.ZXing.NotFoundException)) {
+    //     // console.error(err)
+    //     // document.getElementById('result').textContent = err
+    //   }
+    // })
+    // console.log(`Started continous decode from camera with id ${this.activeDeviceId}`)
+    cameraChanged(deviceId) {
+        this.activeDeviceId = deviceId;
+        // this.startCamera(this.activeDeviceId);
     }
     async componentWillLoad() {
         let tick = () => {
@@ -801,31 +808,14 @@ const PskBarcodeScanner = class {
             console.log('devices', this.devices);
             if (this.devices.length > 0) {
                 this.cameraIsAvailable = true;
-                this.activeDeviceId = this.devices[1].deviceId;
+                // this.activeDeviceId = this.devices[0].deviceId;
             }
         }
     }
     async componentDidRender() {
-        // if (this.componentIsDisconnected) return;
-        //
-        // if (this.cameraIsAvailable === false) {
-        //   this.element.addEventListener('loaded-local-file', this.scanBarcodeFromUploadedFile.bind(this));
-        // } else {
-        //   if (stringToBoolean(this.allowFileBrowsing)) {
-        //     this.element.addEventListener('loaded-local-file', this.scanBarcodeFromUploadedFile.bind(this));
-        //     this.element.addEventListener('use-camera', this.startCameraUsage.bind(this));
-        //   }
-        // }
-        // this.initializeZXing(this.startCameraUsage.bind(this), result => {
-        //   this.modelHandler.updateModel('data', result.data);
-        //   audioData.play();
-        //   this.overlay.drawOverlay(result.points);
-        //   if (!this.componentIsDisconnected) {
-        //     setTimeout(() => {
-        //       if (this.cameraIsOn) this.scanBarcodeFromCamera();
-        //     }, 1000);
-        //   }
-        // });
+        if (this.cameraIsAvailable) {
+            this.startCamera(this.activeDeviceId);
+        }
     }
     disconnectedCallback() {
         this.componentIsDisconnected = true;
@@ -860,7 +850,7 @@ const PskBarcodeScanner = class {
             }
         };
         console.log('render devices', this.devices);
-        const selectCamera = (h("select", { style: style.select, onChange: (e) => this.cameraChanged(e.target.value) }, this.devices.map(device => (h("option", { value: device.deviceId }, device.label)))));
+        const selectCamera = (h("select", { style: style.select, onChange: (e) => this.cameraChanged(e.target.value) }, h("option", { value: "no-camera" }, "Select camera"), this.devices.map(device => (h("option", { value: device.deviceId }, device.label)))));
         // TODO: zxing testing
         // (window as any).cardinalBase}/cardinal/libs/zxing.js
         // <script async src="/cardinal/libs/zxing.new.js"/>
