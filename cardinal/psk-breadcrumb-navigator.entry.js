@@ -1,9 +1,9 @@
-import { r as registerInstance, h, i as Host, g as getElement } from './index-d1085cc4.js';
+import { r as registerInstance, h, i as Host, g as getElement } from './index-bb32d9fe.js';
 import { B as BREADCRUMB_CONSTANTS } from './constants-507b64b1.js';
-import './utilFunctions-5499adff.js';
-import { B as BindModel } from './BindModel-8ea50ef5.js';
-import { C as CustomTheme } from './CustomTheme-3f558a4e.js';
-import { T as TableOfContentProperty } from './TableOfContentProperty-900b66d0.js';
+import './utilFunctions-74de6735.js';
+import { B as BindModel } from './BindModel-524e1a2c.js';
+import { C as CustomTheme } from './CustomTheme-f57ed858.js';
+import { T as TableOfContentProperty } from './TableOfContentProperty-de8188be.js';
 
 const pskBreadcrumbNavigatorArrowsCss = ":host{padding:0.75rem 1.25rem;margin:0 0 2rem 0;font-size:1.1rem;line-height:2.8rem;display:flex;justify-content:flex-start;align-items:center;white-space:nowrap;overflow-x:auto;overflow-y:hidden;-ms-overflow-style:none;scrollbar-width:none}:host::-webkit-scrollbar{display:none}:host psk-button::after{padding:8px;content:\"/\\00a0\"}:host psk-button:last-of-type::after{content:none}:host button,:host button:focus,:host button:active,:host button:active:focus,:host button:hover{background:unset;border:unset;box-shadow:unset;outline:none !important}#next{right:0}#prev{left:0}#next,#prev{position:absolute;background:#fff;border-radius:6px;opacity:0.75;box-shadow:0px 0px 4px #ccc}#next:hover,#prev:hover{opacity:1;pointer-events:all;cursor:pointer;box-shadow:0px 0px 4px #999}#next .icon,#prev .icon{padding:0.25rem}";
 

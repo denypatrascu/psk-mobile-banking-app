@@ -1,5 +1,5 @@
-import { r as registerInstance, g as getElement } from './index-d1085cc4.js';
-import { A as ActiveRouter } from './active-router-44a70032.js';
+import { r as registerInstance, g as getElement } from './index-bb32d9fe.js';
+import { A as ActiveRouter } from './active-router-89a25b91.js';
 
 const StencilRouterPrompt = class {
     constructor(hostRef) {

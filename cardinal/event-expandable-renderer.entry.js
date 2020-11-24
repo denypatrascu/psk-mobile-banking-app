@@ -1,6 +1,6 @@
-import { r as registerInstance, h, g as getElement } from './index-d1085cc4.js';
-import './active-router-44a70032.js';
-import { i as injectHistory } from './index-34b70e38.js';
+import { r as registerInstance, h, g as getElement } from './index-bb32d9fe.js';
+import './active-router-89a25b91.js';
+import { i as injectHistory } from './index-f0762390.js';
 import './match-path-760e1797.js';
 import './location-utils-fea12957.js';
 import { E as EVENTS_TYPES } from './constants-507b64b1.js';

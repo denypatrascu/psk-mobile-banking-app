@@ -1,4 +1,4 @@
-import { r as registerInstance, h, g as getElement } from './index-d1085cc4.js';
+import { r as registerInstance, h, g as getElement } from './index-bb32d9fe.js';
 import { a as applyStyles } from './psk-style.utils-46a368b3.js';
 
 const pskStyleDefaultCss = ":host{display:none}";

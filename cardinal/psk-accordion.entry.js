@@ -1,8 +1,8 @@
-import { r as registerInstance, h, i as Host, g as getElement } from './index-d1085cc4.js';
+import { r as registerInstance, h, i as Host, g as getElement } from './index-bb32d9fe.js';
 import './constants-507b64b1.js';
-import './utilFunctions-5499adff.js';
-import { C as CustomTheme } from './CustomTheme-3f558a4e.js';
-import { T as TableOfContentProperty } from './TableOfContentProperty-900b66d0.js';
+import './utilFunctions-74de6735.js';
+import { C as CustomTheme } from './CustomTheme-f57ed858.js';
+import { T as TableOfContentProperty } from './TableOfContentProperty-de8188be.js';
 
 const pskAccordionDefaultCss = ":host{background-color:#FFFFFF;box-shadow:0 0 5px rgba(0, 0, 0, .25)}:host{display:block;padding:1em 1em 0.15em 1em;border-radius:4px}";
 

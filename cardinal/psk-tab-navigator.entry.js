@@ -1,8 +1,8 @@
-import { r as registerInstance, h, g as getElement } from './index-d1085cc4.js';
+import { r as registerInstance, h, g as getElement } from './index-bb32d9fe.js';
 import './constants-507b64b1.js';
-import './utilFunctions-5499adff.js';
-import { C as CustomTheme } from './CustomTheme-3f558a4e.js';
-import { T as TableOfContentProperty } from './TableOfContentProperty-900b66d0.js';
+import './utilFunctions-74de6735.js';
+import { C as CustomTheme } from './CustomTheme-f57ed858.js';
+import { T as TableOfContentProperty } from './TableOfContentProperty-de8188be.js';
 
 const pskTabNavigatorDefaultCss = ":host .tabs{display:grid}:host .tabs .tab-navigator{overflow-x:auto}:host .tabs .tab-container{position:relative}:host .tabs .tab-navigator .btn{margin:0;border:none;border-radius:0}:host([layout='horizontal']) .tabs .tab-navigator{display:grid;grid-auto-flow:column}:host([layout='horizontal']) .tabs .tab-navigator .btn{width:100%}:host([layout='vertical']) .tabs{grid-template-columns:auto 1fr;align-items:start}:host([layout='vertical']) .tabs .tab-navigator{display:grid}:host([layout='vertical']) .tabs .tab-navigator button.btn{width:100%}:host([layout='mobile']) .tabs .tab-navigator psk-select psk-label{display:none}:host([layout='mobile']) .tabs .tab-navigator psk-select .form-group{margin:0}:host .tabs{background-color:#FFFFFF;box-shadow:0 0 10px rgba(0, 0, 0, 0.25)}:host .tabs .tab-navigator,:host .tabs .tab-navigator .btn{background-color:#4C71DD}:host .tabs .tab-navigator psk-button.active button.btn{background-color:#354F9B;border-style:none}:host .tabs .tab-container{padding:1rem}:host([layout='horizontal']) .tabs .tab-container{border-top:3px solid #354F9B}:host([layout='vertical']) .tabs .tab-navigator{min-width:150px}:host([layout='mobile']) .tabs .tab-navigator{padding:1rem;background-color:#4C71DD70;border-bottom:1px solid #354F9B}";
 

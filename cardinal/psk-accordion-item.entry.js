@@ -1,8 +1,8 @@
-import { r as registerInstance, h, i as Host, g as getElement } from './index-d1085cc4.js';
+import { r as registerInstance, h, i as Host, g as getElement } from './index-bb32d9fe.js';
 import './constants-507b64b1.js';
-import './utilFunctions-5499adff.js';
-import { C as CustomTheme } from './CustomTheme-3f558a4e.js';
-import { T as TableOfContentProperty } from './TableOfContentProperty-900b66d0.js';
+import './utilFunctions-74de6735.js';
+import { C as CustomTheme } from './CustomTheme-f57ed858.js';
+import { T as TableOfContentProperty } from './TableOfContentProperty-de8188be.js';
 
 const pskAccordionItemDefaultCss = ":host{display:block}:host .title{display:flex;align-items:center;outline:none;cursor:pointer;border:2px solid transparent;background-color:transparent}:host .content{transform-origin:top;transition-duration:0.3s;transition-property:transform, padding, height, opacity;transition-timing-function:ease-in}:host .content,:host([opened='false']) .content{overflow:hidden;height:0;opacity:0;padding-top:0;padding-bottom:0;transform:translateY(-0.15em)}:host([opened]) .content,:host([opened='true']) .content{height:100%;opacity:1;padding-top:0.75em;padding-bottom:0.5em;transform:translateY(0)}:host([layout='default']) .title{border-radius:5px}:host([layout='default'][opened]) .title,:host([layout='default'][opened='true']) .title{border-bottom-right-radius:0;border-bottom-left-radius:0}:host([layout='default']) .title .icon{padding:0.45em 0.25em;transition:transform 0.2s ease-in-out}:host([layout='default']) .title .rotated .icon{transform:rotate(90deg)}:host([layout='default']) .content{border:2px solid transparent;border-top:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;margin-bottom:1em;padding-left:0.5em;padding-right:0.5em}:host .title .icon,:host .title span{color:#5E7FE2}:host .title:hover{background-color:#5E7FE225}:host([layout='default']) .title:focus{border-color:#5E7FE2}:host([layout='default'][opened]) .title,:host([layout='default'][opened='true']) .title{background-color:#5E7FE225}:host([layout='default']) .content{border-color:#5E7FE225}";
 
