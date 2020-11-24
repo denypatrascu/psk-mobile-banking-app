@@ -761,7 +761,7 @@ const PskBarcodeScanner = class {
         let tick = () => {
             if (window['ZXing']) {
                 this.ZXing = window['ZXing'];
-                this.codeReader = new this.ZXing.BrowserMultiFormatReader(null, 15000);
+                this.codeReader = new this.ZXing.BrowserMultiFormatReader();
             }
             else {
                 setTimeout(tick, SCAN_TIMEOUT);
