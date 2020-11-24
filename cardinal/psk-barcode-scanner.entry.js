@@ -848,7 +848,7 @@ const PskBarcodeScanner = class {
             h("div", { title: this.title, style: style.barcodeWrapper }, this.cameraIsAvailable === false
                 ? (h("psk-highlight", { title: "No camera detected", "type-of-highlight": "warning" }, h("p", null, "You can still use your device files to check for barcodes!")))
                 : [
-                    h("div", { id: "scanner_container", style: style.videoWrapper }, h("video", { id: "video", muted: true, autoplay: true, playsinline: true, style: style.video })),
+                    h("div", { id: "scanner_container", style: style.videoWrapper }, h("input", { type: "file", accept: "video/*", capture: "camera", style: { display: 'none' } }), h("video", { id: "video", muted: true, autoplay: true, playsinline: true, style: style.video })),
                     h("div", { style: style.controls }, h("label", { htmlFor: "video-source", style: { margin: '0' } }, "Video source: "), h("div", { class: "select", id: "camera-source" }, h("span", null, this.activeDeviceId), selectCamera))
                 ], this.cameraIsAvailable === false
                 ? [
