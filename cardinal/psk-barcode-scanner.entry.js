@@ -51,8 +51,8 @@ const PskBarcodeScanner = class {
             delete constraints.video.facingMode;
             constraints.video['deviceId'] = { exact: deviceId };
         }
-        videoElement.width = constraints.video.width.ideal;
-        videoElement.height = constraints.video.height.ideal;
+        // videoElement.width = constraints.video.width.ideal;
+        // videoElement.height = constraints.video.height.ideal;
         this.codeReader.reset();
         this.codeReader.decodeFromConstraints(constraints, videoElement, (result, err) => {
             if (result) {
