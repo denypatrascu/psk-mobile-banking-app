@@ -838,7 +838,7 @@ const PskBarcodeScanner = class {
         // (window as any).cardinalBase}/cardinal/libs/zxing.js
         // <script async src="/cardinal/libs/zxing.new.js"/>
         return [
-            h("script", { async: true, src: "/cardinal/libs/zxing.new.js" }),
+            h("script", { async: true, src: `${window.cardinalBase}/cardinal/libs/zxing.new.js` }),
             h("div", { title: this.title, style: style.barcodeWrapper }, this.cameraIsAvailable === false
                 ? (h("psk-highlight", { title: "No camera detected", "type-of-highlight": "warning" }, h("p", null, "You can still use your device files to check for barcodes!")))
                 : [
