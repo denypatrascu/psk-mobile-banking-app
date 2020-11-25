@@ -257,7 +257,7 @@ const PskBarcodeScanner = class {
     }
     startCamera(deviceId) {
         const videoElement = this.element.querySelector('#video');
-        let scannerContainer = this.element.querySelector('#scanner-container');
+        // let scannerContainer = this.element.querySelector('#scanner-container');
         let log = console.log;
         console.log = (...args) => {
             if (args.length != 0 && args[0] instanceof this.ZXing.NotFoundException) {
@@ -339,9 +339,10 @@ const PskBarcodeScanner = class {
                 minHeight: '300px'
             },
             video: {
-                position: 'absolute',
-                left: '50%', transform: 'translateX(-50%)',
-                height: '100%'
+                // position: 'absolute',
+                // left: '50%', transform: 'translateX(-50%)',
+                height: '100%', width: '100%',
+                objectFit: 'cover'
             },
             controls: {
                 padding: '1em', margin: '0.25em 0',
