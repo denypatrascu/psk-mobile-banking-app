@@ -212,8 +212,22 @@ const PskBarcodeScanner = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.title = '';
-        this.allowFileBrowsing = false;
-        this.disableFrame = false;
+        // @TableOfContentProperty({
+        //   description: `A boolean value indicating that the current component instance is accepting files from the device. Please note that if no camera is detected, this feature will be automatically enabled.`,
+        //   isMandatory: false,
+        //   propertyType: `boolean`
+        // })
+        // @Prop() allowFileBrowsing: boolean = false;
+        // @TableOfContentProperty({
+        //   description: [
+        //     `A boolean value indicating the scope of the 2D matrix of scanner.`,
+        //     `If it is <code>true</code> the component will analyze only the center square / frame.`,
+        //     `Otherwise the entire screen.`
+        //   ],
+        //   isMandatory: false,
+        //   propertyType: `boolean`
+        // })
+        // @Prop() disableFrame = false;
         this.ZXing = null;
         this.devices = [];
         this.activeDeviceId = null;
@@ -231,7 +245,7 @@ const PskBarcodeScanner = class {
             return;
         }
         const videoElement = this.element.querySelector('#video');
-        let scannerContainer = this.element.querySelector('#scanner_container');
+        let scannerContainer = this.element.querySelector('#scanner-container');
         this.overlay = new VideoOverlay(scannerContainer, videoElement);
         this.overlay.createOverlaysCanvases('lensCanvas', 'overlayCanvas');
         this.overlay.drawLensCanvas();
@@ -243,7 +257,7 @@ const PskBarcodeScanner = class {
     }
     startCamera(deviceId) {
         const videoElement = this.element.querySelector('#video');
-        let scannerContainer = this.element.querySelector('#scanner_container');
+        let scannerContainer = this.element.querySelector('#scanner-container');
         let log = console.log;
         console.log = (...args) => {
             if (args.length != 0 && args[0] instanceof this.ZXing.NotFoundException) {
@@ -254,8 +268,6 @@ const PskBarcodeScanner = class {
         const constraints = {
             video: {
                 facingMode: 'environment',
-                width: { ideal: scannerContainer.offsetWidth },
-                height: { ideal: scannerContainer.offsetHeight },
             }
         };
         if (deviceId && deviceId !== 'no-camera') {
@@ -303,10 +315,9 @@ const PskBarcodeScanner = class {
         // No devices yet
         if (this.devices.length === 0 || !this.activeDeviceId) {
             this.devices = await this.codeReader.listVideoInputDevices();
-            console.log('devices', this.devices);
+            // console.log('devices', this.devices);
             if (this.devices.length > 0) {
                 this.cameraIsAvailable = true;
-                // this.activeDeviceId = this.devices[0].deviceId;
             }
         }
     }
@@ -316,8 +327,6 @@ const PskBarcodeScanner = class {
         }
     }
     render() {
-        // if (this.componentIsDisconnected) return null;
-        // let fileBrowsingIsAllowed = stringToBoolean(this.allowFileBrowsing);
         const style = {
             barcodeWrapper: {
                 display: 'grid', gridTemplateRows: '1fr auto',
@@ -341,24 +350,23 @@ const PskBarcodeScanner = class {
             select: {
                 padding: '5px',
                 background: 'transparent', border: '0'
+            },
+            hidden: {
+                display: 'none'
             }
         };
-        console.log('render devices', this.devices);
         const selectCamera = (h("select", { style: style.select, onChange: (e) => this.cameraChanged(e.target.value) }, h("option", { value: "no-camera" }, "Select camera"), this.devices.map(device => (h("option", { value: device.deviceId }, device.label)))));
-        // TODO: zxing testing
-        // (window as any).cardinalBase}/cardinal/libs/zxing.js
-        // <script async src="/cardinal/libs/zxing.new.js"/>
         return [
-            h("script", { async: true, src: `${window.cardinalBase}/cardinal/libs/zxing.new.js` }),
+            h("script", { async: true, src: `${window.cardinalBase || ''}/cardinal/libs/zxing.new.js` }),
             h("div", { title: this.title, style: style.barcodeWrapper }, this.cameraIsAvailable === false
                 ? (h("psk-highlight", { title: "No camera detected", "type-of-highlight": "warning" }, h("p", null, "You can still use your device files to check for barcodes!")))
                 : [
-                    h("div", { id: "scanner_container", style: style.videoWrapper }, h("input", { type: "file", accept: "video/*", capture: "camera", style: { display: 'none' } }), h("video", { id: "video", muted: true, autoplay: true, playsinline: true, style: style.video })),
-                    h("div", { style: style.controls }, h("label", { htmlFor: "video-source", style: { margin: '0' } }, "Video source: "), h("div", { class: "select", id: "camera-source" }, selectCamera))
+                    h("div", { id: "scanner-container", style: style.videoWrapper }, h("input", { type: "file", accept: "video/*", capture: "camera", style: style.hidden }), h("video", { id: "video", muted: true, autoplay: true, playsinline: true, style: style.video })),
+                    h("div", { style: style.controls }, h("label", { htmlFor: "video-source", style: { margin: '0' } }, "Video source: "), h("div", { id: "camera-source", class: "select" }, selectCamera))
                 ], this.cameraIsAvailable === false
                 ? [
                     h("psk-files-chooser", { accept: "image/*", label: "Load a file from device", "event-name": "loaded-local-file" }),
-                    h("psk-button", { "event-name": "use-camera", label: "Use camera", style: { display: "none" }, id: "use-camera-btn" })
+                    h("psk-button", { id: "use-camera-btn", label: "Use camera", style: style.hidden, "event-name": "use-camera" })
                 ]
                 : null)
         ];
@@ -385,23 +393,5 @@ __decorate([
         propertyType: `string`
     })
 ], PskBarcodeScanner.prototype, "title", void 0);
-__decorate([
-    TableOfContentProperty({
-        description: `A boolean value indicating that the current component instance is accepting files from the device. Please note that if no camera is detected, this feature will be automatically enabled.`,
-        isMandatory: false,
-        propertyType: `boolean`
-    })
-], PskBarcodeScanner.prototype, "allowFileBrowsing", void 0);
-__decorate([
-    TableOfContentProperty({
-        description: [
-            `A boolean value indicating the scope of the 2D matrix of scanner.`,
-            `If it is <code>true</code> the component will analyze only the center square / frame.`,
-            `Otherwise the entire screen.`
-        ],
-        isMandatory: false,
-        propertyType: `boolean`
-    })
-], PskBarcodeScanner.prototype, "disableFrame", void 0);
 
 export { PskBarcodeScanner as psk_barcode_scanner };
