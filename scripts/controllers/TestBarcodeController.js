@@ -23,7 +23,7 @@ class TestBarcodeController extends ContainerController {
 
         this.model.onChange('scanner.data', () => {
             console.log('barcode scanned:', this.model.scanner.data);
-            // alert(this.model.scanner.data);
+            alert(this.model.scanner.data);
         });
     }
 }
