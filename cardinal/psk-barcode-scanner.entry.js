@@ -385,15 +385,8 @@ const PskBarcodeScanner = class {
             }
         };
         return [
-            h("script", { async: true, src: window['cardinalBase'] || `/cardinal/libs/zxing.new.js` }),
-            h("div", { title: this.title, style: style.barcodeWrapper }, this.cameraIsAvailable === false
-                ? (h("psk-highlight", { title: "No camera detected", "type-of-highlight": "warning" }, h("p", null, "You can still use your device files to check for barcodes!")))
-                : (h("div", { id: "scanner-container", style: style.videoWrapper }, h("input", { type: "file", accept: "video/*", capture: "camera", style: style.hidden }), h("video", { id: "video", muted: true, autoplay: true, playsinline: true, style: style.video }), h("button", { onClick: _ => this.switchCamera(), style: style.button }, "Change camera"))), this.cameraIsAvailable === false
-                ? [
-                    h("psk-files-chooser", { accept: "image/*", label: "Load a file from device", "event-name": "loaded-local-file" }),
-                    h("psk-button", { id: "use-camera-btn", label: "Use camera", style: style.hidden, "event-name": "use-camera" })
-                ]
-                : null)
+            h("script", { async: true, src: (window['cardinalBase'] || '') + '/cardinal/libs/zxing.new.js' }),
+            h("div", { title: this.title, style: style.barcodeWrapper }, this.cameraIsAvailable === true ? (h("div", { id: "scanner-container", style: style.videoWrapper }, h("input", { type: "file", accept: "video/*", capture: "camera", style: style.hidden }), h("video", { id: "video", muted: true, autoplay: true, playsinline: true, style: style.video }), h("button", { onClick: _ => this.switchCamera(), style: style.button }, "Change camera"))) : null)
         ];
     }
     get element() { return getElement(this); }
