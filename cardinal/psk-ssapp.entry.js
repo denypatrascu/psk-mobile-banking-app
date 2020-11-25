@@ -152,6 +152,20 @@ const PskSelfSovereignApp = class {
                 }, src: iframeSrc }));
         }
     }
+    ___sendLoadingProgress(progress, status) {
+        let currentWindow = window;
+        let parentWindow = currentWindow.parent;
+        while (currentWindow !== parentWindow) {
+            currentWindow = parentWindow;
+            parentWindow = currentWindow.parent;
+        }
+        parentWindow.document.dispatchEvent(new CustomEvent('ssapp:loading:progress', {
+            detail: {
+                progress,
+                status
+            }
+        }));
+    }
     __hasRelevantMatchParams() {
         return this.match && this.match.params && this.match.params.keySSI;
     }
@@ -167,6 +181,11 @@ const PskSelfSovereignApp = class {
             return;
         }
         if (data.status === 'completed') {
+            const signalFinishLoading = () => {
+                this.___sendLoadingProgress(100);
+                iframe.removeEventListener('load', signalFinishLoading);
+            };
+            iframe.addEventListener('load', signalFinishLoading);
             iframe.contentWindow.location.reload();
         }
     }
