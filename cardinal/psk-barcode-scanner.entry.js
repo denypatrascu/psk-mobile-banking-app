@@ -295,6 +295,18 @@ const PskBarcodeScanner = class {
         this.activeDeviceId = deviceId;
         // this.startCamera(this.activeDeviceId);
     }
+    switchCamera() {
+        let devices = [undefined];
+        for (const device of this.devices) {
+            devices.push(device.deviceId);
+        }
+        let currentIndex = devices.indexOf(this.activeDeviceId);
+        if (currentIndex === devices.length - 1) {
+            currentIndex = -1;
+        }
+        currentIndex++;
+        this.activeDeviceId = devices[currentIndex];
+    }
     async componentWillLoad() {
         let tick = () => {
             if (window['ZXing']) {
@@ -356,14 +368,23 @@ const PskBarcodeScanner = class {
                 display: 'none'
             }
         };
-        const selectCamera = (h("select", { style: style.select, onChange: (e) => this.cameraChanged(e.target.value) }, h("option", { value: "no-camera" }, "Select camera"), this.devices.map(device => (h("option", { value: device.deviceId }, device.label)))));
+        // const selectCamera = (
+        //   <select style={style.select} onChange={(e: any) => this.cameraChanged(e.target.value)}>
+        //     <option value="no-camera">Select camera</option>
+        //     {
+        //       this.devices.map(device => (
+        //         <option value={device.deviceId}>{device.label}</option>
+        //       ))
+        //     }
+        //   </select>
+        // );
         return [
             h("script", { async: true, src: `${window.cardinalBase || ''}/cardinal/libs/zxing.new.js` }),
             h("div", { title: this.title, style: style.barcodeWrapper }, this.cameraIsAvailable === false
                 ? (h("psk-highlight", { title: "No camera detected", "type-of-highlight": "warning" }, h("p", null, "You can still use your device files to check for barcodes!")))
                 : [
                     h("div", { id: "scanner-container", style: style.videoWrapper }, h("input", { type: "file", accept: "video/*", capture: "camera", style: style.hidden }), h("video", { id: "video", muted: true, autoplay: true, playsinline: true, style: style.video })),
-                    h("div", { style: style.controls }, h("label", { htmlFor: "video-source", style: { margin: '0' } }, "Video source: "), h("div", { id: "camera-source", class: "select" }, selectCamera))
+                    h("div", { style: style.controls }, h("button", { onClick: _ => this.switchCamera() }, "Change camera"))
                 ], this.cameraIsAvailable === false
                 ? [
                     h("psk-files-chooser", { accept: "image/*", label: "Load a file from device", "event-name": "loaded-local-file" }),
