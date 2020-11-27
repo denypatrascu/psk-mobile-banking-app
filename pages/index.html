@@ -1,4 +1,4 @@
-<psk-mobile class="noPadding" controller-name="TestMobileController">
+<psk-mobile class="noPadding" controller-name="MainController">
     <img slot="title" src="assets/images/logo.svg" alt="Mobile Banking Logo">
 
     <psk-container controller-name="TestBarcodeController">
@@ -8,10 +8,14 @@
         </psk-condition>
     </psk-container>
 
+
     <psk-for-each slot="options" data-view-model="options">
         <psk-button-link name="@name" page="@page"></psk-button-link>
     </psk-for-each>
-    <psk-for-each slot="footer" data-view-model="footer">
-        <psk-button-link name="@name" icon="@icon" page="@page"></psk-button-link>
-    </psk-for-each>
+    <div slot="options">
+        <psk-button event-name="toggle-fullscreen">
+            <psk-icon icon="@fullscreen.option.icon"></psk-icon>
+            <psk-text-input value="@fullscreen.option.text" read-only></psk-text-input>
+        </psk-button>
+    </div>
 </psk-mobile>

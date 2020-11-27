@@ -91,7 +91,7 @@ class MainController extends ContainerController {
 
     checkFullScreen() {
         if (document.fullscreenEnabled) {
-            this.model.fullscreen.option = this.model.fullscreen.out;
+            this.model.fullscreen.option = this.model.fullscreen.in;
         }
     }
 
